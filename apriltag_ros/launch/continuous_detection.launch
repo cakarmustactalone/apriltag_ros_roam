@@ -6,6 +6,8 @@
   <arg name="camera_name" default="/usb_cam" />
   <arg name="image_topic" default="image_rect" />
   <arg name="queue_size" default="1" />
+  <arg name="settings_path" default="$(find apriltag_ros)/config/settings.yaml" />
+  <arg name="tags_path" default="$(find apriltag_ros)/config/tags.yaml" />
 
   <!-- apriltag_ros continuous detection node -->
   <node pkg="apriltag_ros" type="apriltag_ros_continuous_node" name="apriltag_ros_continuous_node" clear_params="true" output="screen" launch-prefix="$(arg launch_prefix)">
@@ -17,7 +19,7 @@
     <param name="queue_size" type="int" value="$(arg queue_size)" />
 
     <!-- load parameters (incl. tag family, tags, etc.) -->
-    <rosparam command="load" file="$(find apriltag_ros)/config/settings.yaml"/>
-    <rosparam command="load" file="$(find apriltag_ros)/config/tags.yaml"/>
+    <rosparam command="load" file="$(arg settings_path)"/>
+    <rosparam command="load" file="$(arg tags_path)"/>
   </node>
 </launch>
